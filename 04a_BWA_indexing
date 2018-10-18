@@ -1,0 +1,20 @@
+#!/bin/bash
+#PBS -N db1_BWA_indexing
+#PBS -o BWA_indexing.out
+#PBS -l walltime=20:00:00
+#PBS -l mem=60g
+#PBS -r n
+
+TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
+SCRIPT=$0
+NAME=$(basename $0)
+
+
+# Global variables
+
+BWA=/home1/datahome/creisser/local-programs/bwa-0.7.15
+FASTA=/home1/datawork/creisser/PL_color/02_data/genome/sspace.final.scaffolds.fasta
+
+# index the transcriptome
+$BWA/bwa index $FASTA
+

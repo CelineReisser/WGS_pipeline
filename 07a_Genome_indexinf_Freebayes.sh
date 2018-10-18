@@ -1,6 +1,6 @@
 #!/bin/bash
 #PBS -N db1_BWA_indexing
-#PBS -o /home1/datawork/creisser/sex_det/98_log_files/08a_BWA_indexing.out
+#PBS -o /home1/datawork/creisser/sex_det/98_log_files/07a_Genome_indexing_Freebayes.out
 #PBS -l walltime=20:00:00
 #PBS -l mem=60g
 #PBS -r n

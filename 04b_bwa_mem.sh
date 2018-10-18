@@ -1,23 +1,38 @@
-ASSEMBLY="/home/datawork-rmpf/platax/sex_det/rna-seq_mapping_workflow/01_info_files/transcriptome_platax_40278.fa"
-WORKING_DIRECTORY=/home1/datahome/creisser/scratch/platax/sex_det/rna-seq_mapping_workflow
+ASSEMBLY="/home1/datawork/creisser/sex_det/01_info_files/sspace.final.scaffolds.fasta"
+WORKING_DIRECTORY=/home1/datawork/creisser/sex_det/
 BWA="bwa"
 BWA_ENV=". /appli/bioinfo/bwa/latest/env.sh"
-INDIR=/home1/datahome/creisser/scratch/platax/sex_det/rna-seq_mapping_workflow/03_trimmed
-OUTDIR=/home1/datahome/creisser/scratch/platax/sex_det/rna-seq_mapping_workflow/04_mapped
-LOG_FOLDER=/home1/scratch/creisser/platax/sex_det/rna-seq_mapping_workflow/98_log_files
-NAME='cat /home1/scratch/creisser/platax/sex_det/rna-seq_mapping_workflow/00_scripts/base.txt'
-SCRIPT=/home1/scratch/creisser/platax/sex_det/rna-seq_mapping_workflow/00_scripts/04_bwa
-HEADER=/home1/scratch/creisser/platax/sex_det/rna-seq_mapping_workflow/00_scripts/header.txt
+INDIR=/home1/datawork/creisser/sex_det/03_trimmed
+OUTDIR=/home1/scratch/creisser/sex_det/04_mapped
+LOG_FOLDER=/home1/datawork/creisser/sex_det/98_log_files
+NAMEM='cat /home1/datawork/creisser/sex_det/00_scripts/baseM.txt'
+NAMEF='cat /home1/datawork/creisser/sex_det/00_scripts/baseF.txt'
+SCRIPT=/home1/datawork/creisser/sex_det/00_scripts/04_bwa
+HEADER=/home1/datawork/creisser/sex_det/00_scripts/header-big-mem.txt
 
 mkdir -p $SCRIPT
-
+mkdir -p $OUTDIR
 cd $INDIR
-for FILE in $($NAME)
+
+# Fir individual file (no pooling), SM needs to be different:
+for FILE in $($NAMEM)
+do
+        cp $HEADER $SCRIPT/bwa_${FILE##*/}.qsub ;
+	echo "#PBS -N 04_bwa_mem_"$FILE" " >> $SCRIPT/bwa_${FILE##*/}.qsub ;
+        echo "#PBS -o /home1/datawork/creisser/sex_det/98_log_files/04_bwa_mem_"$FILE".txt" >> $SCRIPT/bwa_${FILE##*/}.qsub ;
+        echo "cd $INDIR" >> $SCRIPT/bwa_${FILE##*/}.qsub ;
+	echo "$BWA_ENV" >> $SCRIPT/bwa_${FILE##*/}.qsub ;
+        echo "bwa mem -t 28 -M -R '@RG\tID:$FILE\tSM:$FILE\tPL:illumina\tLB:lib1\tPU:unit1' ${ASSEMBLY} $INDIR/"$FILE"_R1_paired.fastq.gz $INDIR/"$FILE"_R2_paired.fastq.gz > $OUTDIR/"$FILE".sam" >> $SCRIPT/bwa_${FILE##*/}.qsub ;
+        qsub $SCRIPT/bwa_${FILE##*/}.qsub ;
+done ;
+
+# For pooled data, SM needs to be the same:
+for FILE in $($NAMEF)
 do
         cp $HEADER $SCRIPT/bwa_${FILE##*/}.qsub ;
         echo "cd $INDIR" >> $SCRIPT/bwa_${FILE##*/}.qsub ;
         echo "$BWA_ENV" >> $SCRIPT/bwa_${FILE##*/}.qsub ;
-        echo "bwa mem -t 16 -M -R '@RG\tID:$FILE\tSM:$FILE\tPL:illumina\tLB:lib1\tPU:unit1' ${ASSEMBLY} $INDIR/"$FILE"_R1.paired.fastq.gz $INDIR/"$FILE"_R2.paired.fastq.gz > $OUTDIR/"$FILE".sam" >> $SCRIPT/bwa_${FILE##*/}.qsub ;
+        echo "bwa mem -t 28 -M -R '@RG\tID:$FILE\tSM:poolFemales\tPL:illumina\tLB:lib1\tPU:unit1' ${ASSEMBLY} $INDIR/"$FILE"_R1_paired.fastq.gz $INDIR/"$FILE"_R2_paired.fastq.gz > $OUTDIR/"$FILE".sam" >> $SCRIPT/bwa_${FILE##*/}.qsub ;
         qsub $SCRIPT/bwa_${FILE##*/}.qsub ;
 done ;
 

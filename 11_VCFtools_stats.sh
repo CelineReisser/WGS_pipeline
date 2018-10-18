@@ -12,12 +12,12 @@ VCFTOOLSENV=". /appli/bioinfo/vcftools/0.1.14/env.sh"
 $VCFTOOLSENV
 cd $INDIR
 
-vcftools --weir-fst-pop $DATADIRECTORY/00_scripts/base-M.txt --weir-fst-pop $DATADIRECTORY/00_scripts/base-F.txt --vcf $INDIR/platax_sex_DP15_snp_maf0.1_miss0.recode.vcf --out $INDIR/platax_sex_DP15_snp_maf0.1_miss0
+vcftools --weir-fst-pop $DATADIRECTORY/00_scripts/base-M.txt --weir-fst-pop $DATADIRECTORY/00_scripts/base-F.txt --vcf $INDIR/sex_det_snp_DP10_maf0.1_miss0.final_biallelic.vcf --out $INDIR/sex_det_snp_DP10_maf0.1_miss0.final_biallelic
 
-#vcftools --TsTv --vcf $INDIR/platax_sex_DP15_snp_maf0.1.vcf.recode.vcf --out $INDIR/platax_sex_DP15_snp_maf0.1
+#vcftools --TsTv --vcf $INDIR/sex_det_snp_DP10_maf0.1_miss0.final_biallelic.vcf --out $INDIR/sex_det_snp_DP10_maf0.1_miss0.final_biallelic
 
-vcftools --relatedness --vcf $INDIR/platax_sex_DP15_snp_maf0.1_miss0.recode.vcf --out $INDIR/platax_sex_DP15_snp_maf0.1_miss0
+vcftools --relatedness --vcf $INDIR/sex_det_snp_DP10_maf0.1_miss0.final_biallelic.vcf --out $INDIR/sex_det_snp_DP10_maf0.1_miss0.final_biallelic
 
-vcftools --depth --vcf $INDIR/platax_sex_DP15_snp_maf0.1_miss0.recode.vcf --out $INDIR/platax_sex_DP15_snp_maf0.1_miss0
+vcftools --depth --vcf $INDIR/sex_det_snp_DP10_maf0.1_miss0.final_biallelic.vcf --out $INDIR/sex_det_snp_DP10_maf0.1_miss0.final_biallelic
 
-vcftools --geno-depth --vcf $INDIR/platax_sex_DP15_snp_maf0.1_miss0.recode.vcf --out $INDIR/platax_sex_DP15_snp_maf0.1_miss0
+vcftools --geno-depth --vcf $INDIR/sex_det_snp_DP10_maf0.1_miss0.final_biallelic.vcf --out $INDIR/sex_det_snp_DP10_maf0.1_miss0.final_biallelic

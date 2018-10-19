@@ -5,8 +5,6 @@
 #PBS -l mem= g
 #PBS -r n
 
-TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
-
 # Global variables
 DATADIRECTORY=/Path/to/your/copy/of/WGS_pipeline
 BWA=Path/to/executables

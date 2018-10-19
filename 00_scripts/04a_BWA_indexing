@@ -6,15 +6,12 @@
 #PBS -r n
 
 TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
-SCRIPT=$0
-NAME=$(basename $0)
-
 
 # Global variables
-
+DATADIRECTORY=/Path/to/your/copy/of/WGS_pipeline
 BWA=Path/to/executables
-FASTA=/Path to genome.fasta
+FASTA=01_info_files
 
 # index the transcriptome
-$BWA/bwa index $FASTA
+$BWA/bwa index $FASTA/name_of_genome.fasta
 

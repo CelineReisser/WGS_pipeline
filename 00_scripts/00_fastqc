@@ -1,12 +1,16 @@
-DATADIRECTORY=
-DATAOUTPUT= "path to directory to store results html"
-SCRIPT= "path to the folder to store all the sample scripts for fastqc"
-HEADER= "path to the header file showing the specificities of your cluster run"
+DATADIRECTORY=/Path/to/Your/Copy/of/WGS_pipeline
+DATAINPUT= 02_data
+DATAOUTPUT= 02_data/qc
+SCRIPT= 00_scripts/00_fastqc
+HEADER= 00_scripts/header.txt
 FASTQCENV= " path to the fastc executables"
 
+#The header file specifies the run characteristics of your cluster
+
+cd $DATADIRECTORY
 mkdir -p $SCRIPT
 
-for FILE in $(ls $DATADIRECTORY/*.fastq.gz)
+for FILE in $(ls $DATAINPUT/*.fastq.gz)
 do
         cp $HEADER $SCRIPT/fastqc_${FILE##*/}.qsub ;
         echo "cd $DATADIRECTORY" >> $SCRIPT/fastqc_${FILE##*/}.qsub ;

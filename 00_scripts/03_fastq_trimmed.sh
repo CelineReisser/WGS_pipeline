@@ -1,12 +1,14 @@
-DATADIRECTORY=
-DATAOUTPUT=
-SCRIPT=
-HEADER=
-FASTQCENV=
+DATADIRECTORY= Path/to/your/copy/of/WGS_pipeline
+DATAINPUT=03_trimmed
+DATAOUTPUT= 03_trimmed/qc
+SCRIPT= 00_scripts/03_fastqc_trimmed
+HEADER= 00_scripts/header.txt
+FASTQCENV= "executables"
 
+cd $DATADIRECTORY
 mkdir -p $SCRIPT
 
-for FILE in $(ls $DATADIRECTORY/*.fastq.gz)
+for FILE in $(ls $DATAINPUT/*.fastq.gz)
 do
         cp $HEADER $SCRIPT/fastqc_${FILE##*/}.qsub ;
         echo "cd $DATADIRECTORY" >> $SCRIPT/fastqc_${FILE##*/}.qsub ;

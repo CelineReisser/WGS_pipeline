@@ -1,8 +1,8 @@
-DATADIRECTORY=/home1/scratch/creisser/platax/sex_det/rna-seq_mapping_workflow/03_trimmed
-DATAOUTPUT=/home1/scratch/creisser/platax/sex_det/rna-seq_mapping_workflow/02_data/qc
-SCRIPT=/home1/scratch/creisser/platax/sex_det/rna-seq_mapping_workflow/00_scripts/03_fastqc_trimmed_scripts
-HEADER=/home1/scratch/creisser/platax/sex_det/rna-seq_mapping_workflow/00_scripts/header.txt
-FASTQCENV=". /appli/bioinfo/fastqc/latest/env.sh"
+DATADIRECTORY=
+DATAOUTPUT=
+SCRIPT=
+HEADER=
+FASTQCENV=
 
 mkdir -p $SCRIPT
 

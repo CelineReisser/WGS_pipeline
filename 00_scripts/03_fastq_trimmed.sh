@@ -7,6 +7,7 @@ FASTQCENV= "executables"
 
 cd $DATADIRECTORY
 mkdir -p $SCRIPT
+mkdir -p $DATAOUTPUT
 
 for FILE in $(ls $DATAINPUT/*.fastq.gz)
 do

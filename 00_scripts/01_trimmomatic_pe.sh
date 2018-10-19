@@ -1,24 +1,26 @@
-DATADIRECTORY= #input directory
-DATAOUTPUT= #output directory
-SCRIPT= #path to store individual scripts
-HEADER=#path to header.txt for your cluster specifics
-TRIMMOMATICENV=" exectutables"
+DATADIRECTORY= Path/to/your/copy/of/WGS_pipeline
+DATAINPUT= 02_data
+DATAOUTPUT= 03_trimmed
+SCRIPT= 00_scripts/01_trimmamatic_pe
+HEADER= 00_scripts/header.txt
+TRIMMOMATICENV=" executables"
 TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
-LOG_FOLDER= #path to log folder
-NAME='cat /path/to/file/listing/sample_Names/base.txt'
+LOG_FOLDER= 98_log_files
+NAME='cat 00_scripts/base.txt'
 
 
 # Global variables
 
 #>Illumina_TruSeq_LT_R1 AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC
 #>Illumina_TruSeq_LT_R2 AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
-ADAPTERFILE="path to adapters.fasta"
+ADAPTERFILE= "00_scripts/adapters.fasta"
 NCPU=4
 
 cd $DATADIRECTORY
 
 mkdir -p $SCRIPT
 mkdir -p $DATAOUTPUT
+
 for file in $($NAME)
 do
          cp $HEADER $SCRIPT/trimmomatic_pe_${file##*/}.qsub ;

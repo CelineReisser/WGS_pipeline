@@ -6,7 +6,6 @@ HEADER=00_scripts/header.txt
 TRIMMOMATICENV= executables
 TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
 LOG_FOLDER=98_log_files
-#BASE=/home1/scratch/creisser/platax/sex_det/rna-seq_mapping_workflow/00_scripts/base.txt
 NAME='cat 00_scripts/base.txt'
 
 

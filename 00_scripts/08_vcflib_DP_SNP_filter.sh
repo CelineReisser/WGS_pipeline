@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
-#PBS -q mpi
+#PBS -q 
 #PBS -l walltime=24:00:00
 #PBS -l select=1:ncpus=28:mem=115g
-#PBS -o /home1/datawork/creisser/sex_det/98_log_files
+#PBS -o 98_log_files
 #PBS -N vcffilter
 
-DATADIRECTORY=/home1/scratch/creisser/sex_det/07_freebayes
-INDIR=/home1/scratch/creisser/sex_det/07_freebayes
-VCFLIBENV=". /appli/bioinfo/vcflib/1.0.0_rc1/env.sh"
+DATADIRECTORY=/Path/to/your/copy/of/WGS_pipeline
+INDIR=07_freebayes
+VCFLIBENV= executables
 
 $VCFLIBENV
-cd $INDIR
+cd $DATADIRECTORY/$INDIR
 
-vcffilter -g "DP > 10" -f" TYPE = snp" $INDIR/sex_det_snp.vcf > $INDIR/sex_det_snp_DP10.vcf
+vcffilter -g "DP > 10" -f" TYPE = snp" sex_det_snp.vcf > sex_det_snp_DP10.vcf
 
 
 

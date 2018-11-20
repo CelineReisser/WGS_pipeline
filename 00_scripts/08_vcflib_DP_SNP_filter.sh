@@ -12,7 +12,7 @@ VCFLIBENV= executables
 $VCFLIBENV
 cd $DATADIRECTORY/$INDIR
 
-vcffilter -g "DP > 10" -f" TYPE = snp" sex_det_snp.vcf > sex_det_snp_DP10.vcf
+vcffilter -g "DP > 10" -f "TYPE = snp" sex_det_snp.vcf > sex_det_snp_DP10.vcf
 
 
 
